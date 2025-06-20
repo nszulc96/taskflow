@@ -25,3 +25,6 @@ Um gerenciador de tarefas simples e eficiente para organizar seu dia a dia.
 1. Clone o repositório:
 ```bash
 git clone https://github.com/seu-usuario/taskflow.git
+
+## Obs.:
+pode ser que algumas coisas ainda não funcionem 100% rs
