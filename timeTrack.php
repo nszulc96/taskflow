@@ -162,6 +162,16 @@
             border-radius: 10px;
         }
 
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--gray-light);
+            color: var(--dark);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
         .task-list {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -513,6 +523,9 @@
                                     <i class="fas fa-stop"></i> Finalizar
                                 </button>
                             ` : ''}
+                            <button class="btn btn-outline btn-sm delete-btn" data-id="${task.id}">
+                                <i class="fas fa-trash-alt"></i> Excluir
+                            </button>
                         </div>
                     `;
                     
@@ -538,6 +551,13 @@
                     btn.addEventListener('click', function() {
                         const taskId = this.getAttribute('data-id');
                         stopTimer(taskId);
+                    });
+                });
+
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const taskId = this.getAttribute('data-id');
+                        deleteTask(taskId);
                     });
                 });
             }
@@ -579,9 +599,22 @@
                                 <i class="far fa-calendar"></i> Criada em: ${createdDate}
                             </div>
                         </div>
+                        <div class="task-actions">
+                            <button class="btn btn-outline btn-sm delete-btn" data-id="${task.id}">
+                                <i class="fas fa-trash-alt"></i> Excluir
+                            </button>
+                        </div>
                     `;
                     
                     completedTasksContainer.appendChild(taskElement);
+                });
+
+                // Adicionar event listeners aos botões de exclusão
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const taskId = this.getAttribute('data-id');
+                        deleteTask(taskId);
+                    });
                 });
             }
 
@@ -660,6 +693,25 @@
                 renderCompletedTasks();
             }
 
+            // Excluir uma tarefa específica
+            function deleteTask(taskId) {
+                if (confirm('Tem certeza que deseja excluir esta tarefa?')) {
+                    // Parar o timer se estiver rodando
+                    if (activeTimers[taskId]) {
+                        clearInterval(activeTimers[taskId]);
+                        delete activeTimers[taskId];
+                    }
+                    
+                    // Remover a tarefa do array
+                    tasks = tasks.filter(task => task.id !== taskId);
+                    saveTasks();
+                    
+                    // Renderizar novamente as listas
+                    renderActiveTasks();
+                    renderCompletedTasks();
+                }
+            }
+
             // Atualizar display do timer
             function updateTimerDisplay(taskId) {
                 const task = tasks.find(task => task.id === taskId);
@@ -678,6 +730,14 @@
             // Limpar tarefas completadas
             clearCompletedButton.addEventListener('click', function() {
                 if (confirm('Tem certeza que deseja limpar todas as tarefas completadas?')) {
+                    // Parar todos os timers das tarefas completadas (caso existam)
+                    tasks.filter(task => task.isCompleted).forEach(task => {
+                        if (activeTimers[task.id]) {
+                            clearInterval(activeTimers[task.id]);
+                            delete activeTimers[task.id];
+                        }
+                    });
+                    
                     tasks = tasks.filter(task => !task.isCompleted);
                     saveTasks();
                     renderCompletedTasks();
