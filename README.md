@@ -1,30 +1,48 @@
-# TaskFlow
+# TaskFlow - Gerenciador de Tarefas com Timer
 
-Um gerenciador de tarefas simples e eficiente para organizar seu dia a dia.
+![TaskFlow Screenshot](screenshot.png) <!-- Adicione uma screenshot depois -->
+
+TaskFlow é um gerenciador de tarefas simples que inclui timer para controle de tempo gasto em cada atividade.
 
 ## Funcionalidades
 
-- ✅ Criar e gerenciar tarefas
-- 📁 Organizar por projetos
-- ⏱️ Timer para controle de tempo
-- 📊 Visualização em gráficos
-- 📅 Filtros por data e status
-- 🎨 Interface limpa e intuitiva
+- ✅ Adicionar novas tarefas
+- ⏱️ Timer para controlar tempo gasto em cada tarefa
+- ▶️ Play/Pause para controlar a contagem de tempo
+- ✔️ Marcar tarefas como finalizadas
+- 💾 Salva automaticamente no localStorage do navegador
+- 🔄 Persistência dos timers mesmo após atualizar/fechar a página
 
-## Tecnologias
+## Como Usar
+
+1. Digite a descrição da tarefa no campo "NOVA TAREFA"
+2. Clique em "Adicionar Tarefa" ou pressione Enter
+3. Use os botões:
+   - ▶️ Play - Inicia o timer
+   - ⏸️ Pause - Pausa o timer
+   - ⏹️ Finalizar - Completa a tarefa e para o timer
+
+## Tecnologias Utilizadas
 
 - HTML5
 - CSS3
-- JavaScript
-- Bootstrap 5
-- Chart.js
-- LocalStorage
+- JavaScript Vanilla
 
-## Como usar
+## Instalação
 
-1. Clone o repositório:
-```bash
-git clone https://github.com/seu-usuario/taskflow.git
+Não requer instalação! Basta abrir o arquivo `index.html` em qualquer navegador moderno.
 
-## Obs.:
-pode ser que algumas coisas ainda não funcionem 100% rs
+## Recursos Futuros
+
+- [ ] Categorias de tarefas
+- [ ] Relatórios de tempo gasto
+- [ ] Sincronização entre dispositivos
+- [ ] Exportar/importar dados
+
+## Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+
+## Licença
+
+MIT
